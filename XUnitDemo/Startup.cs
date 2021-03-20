@@ -37,10 +37,12 @@ namespace XUnitDemo
             var IdentityConnection = Configuration.GetConnectionString("DefaultConnection");
 
             services.AddDbContext<AppDbContext>(options =>
+            {
+                options.UseLazyLoadingProxies();
                 options.UseSqlServer(
                    IdentityConnection,
-                   optionsBuilder => optionsBuilder.MigrationsAssembly("Infrastracture"))
-                );
+                   optionsBuilder => optionsBuilder.MigrationsAssembly("Infrastracture"));
+            });
             services.AddScoped<ICalculation, Calculation>();
             services.AddScoped<IResponse, Response>();
             services.AddScoped<IDeptService, DeptService>();

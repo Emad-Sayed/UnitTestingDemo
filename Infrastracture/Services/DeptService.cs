@@ -42,7 +42,8 @@ namespace Infrastracture.Services
 
         public IResponse GetById(int id)
         {
-            var selectedDept = _context.Depts.SingleOrDefault(dept => dept.Id == id);
+            var selectedDept = _context.Depts.FirstOrDefault(dept => dept.Id == id);
+            var off = selectedDept.Offices;
             if (selectedDept == null)
                 _response.status = false;
             else
